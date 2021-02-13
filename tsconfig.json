@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "outDir": "./build/",
+    "moduleResolution": "node",
+    "strict": true,
+    "lib": [
+      "dom",
+      "esnext",
+      "dom.iterable",
+    ],
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": true
+}
