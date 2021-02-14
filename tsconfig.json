@@ -10,9 +10,10 @@
       "esnext",
       "dom.iterable",
     ],
+    "noUnusedLocals": true,
   },
   "include": [
-    "src/**/*.ts"
+    "./src"
   ],
   "exclude": [
     "node_modules"

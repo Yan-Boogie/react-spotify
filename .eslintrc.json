@@ -17,7 +17,7 @@
     ],
     "overrides": [
         {
-          "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+          "files": ["./**/*.js", "./**/*.jsx", "./**/*.ts", "./**/*.tsx"],
           "extends": [
             "eslint:recommended",
             "plugin:@typescript-eslint/eslint-recommended",
@@ -170,32 +170,14 @@
             "import/no-extraneous-dependencies": [
               "error",
               {
-                "packageDir": [
-                  "./",
-                  "./packages/core",
-                  "./packages/ng",
-                  "./packages/react"
-                ]
+                "packageDir": "./"
               }
             ],
             "import/prefer-default-export": "off"
           }
         },
         {
-          "files": ["*.js", "*.jsx"],
-          "rules": {
-            "no-unused-vars": [
-              "error",
-              {
-                "varsIgnorePattern": "^_",
-                "argsIgnorePattern": "^_",
-                "ignoreRestSiblings": true
-              }
-            ]
-          }
-        },
-        {
-          "files": ["*.ts", "*.tsx"],
+          "files": ["./**/*.ts", "./**/*.tsx"],
           "rules": {
             "indent": "off",
             "@typescript-eslint/explicit-function-return-type": "off",
@@ -214,7 +196,7 @@
           }
         },
         {
-          "files": ["*.tsx", "*.mdx"],
+          "files": ["./**/*.tsx"],
           "parserOptions": {
             "ecmaFeatures": {
               "jsx": true
@@ -245,24 +227,6 @@
             "react/prop-types": "off",
             "react/react-in-jsx-scope": "off",
             "react/static-property-placement": "off"
-          }
-        },
-        {
-          "files": ["*.spec.{ts,tsx}"],
-          "env": {
-            "jest": true
-          },
-          "rules": {
-            "max-classes-per-file": "off",
-            "@typescript-eslint/no-non-null-assertion": "off",
-            "@typescript-eslint/no-useless-constructor": "off"
-          }
-        },
-        {
-          "files": ["*.mdx"],
-          "extends": ["plugin:mdx/recommended"],
-          "rules": {
-            "no-unused-vars": "off"
           }
         }
       ]
