@@ -4,6 +4,7 @@
     "target": "esnext",
     "outDir": "./build/",
     "moduleResolution": "node",
+    "jsx": "react",
     "strict": true,
     "lib": [
       "dom",
@@ -13,7 +14,8 @@
     "noUnusedLocals": true,
   },
   "include": [
-    "./src"
+    "./src",
+    "**/*.config.js"
   ],
   "exclude": [
     "node_modules"
