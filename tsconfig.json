@@ -16,8 +16,7 @@
     "noUnusedLocals": true,
   },
   "include": [
-    "./src",
-    "**/*.config.js"
+    "./src"
   ],
   "exclude": [
     "node_modules"
