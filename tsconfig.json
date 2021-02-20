@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "module": "esnext",
-    "target": "esnext",
+    "target": "ES2019",
     "outDir": "./build/",
     "moduleResolution": "node",
     "jsx": "react",
