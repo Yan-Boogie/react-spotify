@@ -6,7 +6,7 @@
     "target": "ES2019",
     "outDir": "./build/",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
     "lib": [
       "dom",
