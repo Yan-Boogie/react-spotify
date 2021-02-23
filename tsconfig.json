@@ -17,6 +17,7 @@
   },
   "include": [
     "./src",
+    "./app",
     "./*.config.js"
   ],
   "exclude": [

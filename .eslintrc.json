@@ -170,7 +170,7 @@
             "import/no-extraneous-dependencies": [
               "error",
               {
-                "packageDir": "./"
+                "devDependencies": true
               }
             ],
             "import/prefer-default-export": "off"

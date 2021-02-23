@@ -6,6 +6,11 @@
   "repository": "git@github.com:Yan-Boogie/react-spotify.git",
   "author": "Ian Lai <ian24257587@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "src",
+    "app"
+  ],
   "scripts": {
     "cm": "git cz",
     "test": "jest"
@@ -13,10 +18,6 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/react-hooks": "^5.0.3",
-    "@types/jest": "^26.0.20",
-    "@types/react": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "commitizen": "^4.2.3",
@@ -28,13 +29,8 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^5.0.9",
-    "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-test-renderer": "^17.0.1",
-    "ts-jest": "^26.5.1",
     "typescript": "^4.1.5"
   },
   "config": {
