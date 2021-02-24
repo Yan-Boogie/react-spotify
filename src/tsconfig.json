@@ -1,9 +1,26 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "lib/types",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "target": "ES2019",
+    "outDir": "./build/",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "strict": true,
+    "lib": [
+      "dom",
+      "esnext",
+      "dom.iterable",
+    ],
+    "noUnusedLocals": true,
   },
-  "include": ["hooks/**/*"]
+  "include": [
+    "hooks/**/*",
+    "**/*.config.js"
+  ],
+  "exclude": ["node_modules"]
 }

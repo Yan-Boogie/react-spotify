@@ -68,3 +68,6 @@ config.js
 #keys
 server/keys/*
 !server/keys/__KEYS__
+
+# Next.js build output
+.next
