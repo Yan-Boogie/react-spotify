@@ -2,9 +2,16 @@
   "name": "src",
   "version": "1.0.0",
   "description": "react-spotify library",
-  "main": "index.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/types",
   "license": "MIT",
+  "scripts": {
+    "build": "rollup -c rollup.config.ts"
+  },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
     "@testing-library/react": "^11.2.5",
     "@testing-library/react-hooks": "^5.0.3",
     "@types/jest": "^26.0.20",
@@ -13,6 +20,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1",
+    "rollup": "^2.39.1",
+    "rollup-plugin-typescript2": "^0.30.0",
     "ts-jest": "^26.5.1"
   },
   "peerDependencies": {

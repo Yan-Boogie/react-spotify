@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "lib/types",
+    "resolveJsonModule": true,
+  },
+  "include": ["hooks/**/*"]
+}
