@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import {
   useState,
   useEffect,
   useContext,
+  useRef,
 } from 'react';
 import { UserTokenContext } from '../context';
 
@@ -21,42 +23,61 @@ type RequestMethod = 'GET' | 'PUT';
 export default function useSpotifyApiRequest({
   requestUrl,
   requestMethod,
+  limit = 10,
+  offset = 0,
 }: {
   requestUrl: string,
   requestMethod: RequestMethod,
+  limit?: number,
+  offset?: number,
 }) {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | Error>(null);
   const [apiReturned, setApiReturned] = useState<null | unknown>(null);
+  const [currentOffset, setCurrentOffset] = useState(offset);
   const token = useContext(UserTokenContext);
+  const isApiRequestCanceled = useRef(false);
 
-  useEffect(() => {
-    let canceled = false;
-
+  const apiRequest = async () => {
     setLoading(true);
 
     try {
-      fetch(requestUrl, {
+      await fetch(`${requestUrl}?offset=${currentOffset}&limit=${limit}`, {
         method: requestMethod,
         headers: new Headers({
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         }),
-      }).then((response) => {
-        if (!canceled) {
-          setApiReturned(response.json());
-          setLoading(false);
+      }).then((res) => res.json()).then((response) => {
+        console.log('canceled', isApiRequestCanceled.current);
+
+        if (!isApiRequestCanceled.current) {
+          setApiReturned(response);
+          setCurrentOffset((prevOffset) => prevOffset + limit);
         }
       });
     } catch (e) {
-      setLoading(false);
       setError(e);
     }
 
-    return () => {
-      canceled = true;
-    };
-  }, [requestUrl]);
+    setLoading(false);
+  };
 
-  return { isLoading, error, apiReturned };
+  useEffect(() => {
+    apiRequest();
+
+    return () => {
+      isApiRequestCanceled.current = true;
+    };
+  }, []);
+
+  const fetchMore = () => {
+    isApiRequestCanceled.current = true;
+
+    apiRequest();
+  };
+
+  return {
+    isLoading, error, apiReturned, fetchMore,
+  };
 }
