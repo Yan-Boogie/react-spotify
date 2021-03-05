@@ -9,8 +9,7 @@ import { UserTokenContext } from '../context';
 
 /**
  * @todo
- * 1. fetchMore feature
- * 2. Spotify playback error type
+ * 1. Spotify playback error type
  */
 
 type Error = Readonly<{

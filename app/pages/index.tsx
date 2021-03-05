@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect } from 'react';
-import { useSpotifyApiRequest, useSpotify } from '../../src';
+import { useSpotifyApiRequest, useSpotify } from 'src';
 import { TOKEN } from '../mock';
 
 const SpotifyPlaylist = () => {
