@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import {
   useState,
   useEffect,
   useContext,
   useRef,
+  useMemo,
 } from 'react';
 import { UserTokenContext } from '../context';
 
@@ -17,42 +17,57 @@ type Error = Readonly<{
   status: number;
 }>;
 
-type RequestMethod = 'GET' | 'PUT';
+type RequestMethod = 'GET' | 'POST' | 'PUT';
+
+type FetchMoreBundle = {
+  limit: number;
+  offset: number;
+};
+
+type UseSpotifyApiRequest = {
+  requestUrl: string;
+  requestMethod: RequestMethod;
+  fetchMoreBundle?: FetchMoreBundle;
+};
 
 export default function useSpotifyApiRequest({
   requestUrl,
   requestMethod,
-  limit = 10,
-  offset = 0,
-}: {
-  requestUrl: string,
-  requestMethod: RequestMethod,
-  limit?: number,
-  offset?: number,
-}) {
+  fetchMoreBundle,
+}: UseSpotifyApiRequest) {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | Error>(null);
   const [apiReturned, setApiReturned] = useState<null | unknown>(null);
-  const [currentOffset, setCurrentOffset] = useState(offset);
+  const [currentOffset, setCurrentOffset] = useState<number>(fetchMoreBundle?.offset ?? 0);
   const token = useContext(UserTokenContext);
   const isApiRequestCanceled = useRef(false);
 
+  const urlSuffixed = useMemo(() => {
+    if (!fetchMoreBundle) return requestUrl;
+
+    const { limit = 10 } = fetchMoreBundle;
+
+    return (~requestUrl.indexOf('?')
+      ? requestUrl.replace('?', `?limit=${limit}&offset=${currentOffset}`)
+      : `${requestUrl}?limit=${limit}&offset=${currentOffset}`);
+  }, [currentOffset]);
+
   const apiRequest = async () => {
+    isApiRequestCanceled.current = false;
     setLoading(true);
 
     try {
-      await fetch(`${requestUrl}?offset=${currentOffset}&limit=${limit}`, {
+      await fetch(urlSuffixed, {
         method: requestMethod,
         headers: new Headers({
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         }),
       }).then((res) => res.json()).then((response) => {
-        console.log('canceled', isApiRequestCanceled.current);
-
         if (!isApiRequestCanceled.current) {
           setApiReturned(response);
-          setCurrentOffset((prevOffset) => prevOffset + limit);
+
+          if (fetchMoreBundle) setCurrentOffset((prevOffset) => prevOffset + fetchMoreBundle.limit);
         }
       });
     } catch (e) {
@@ -64,19 +79,13 @@ export default function useSpotifyApiRequest({
 
   useEffect(() => {
     apiRequest();
-
-    return () => {
-      isApiRequestCanceled.current = true;
-    };
   }, []);
 
   const fetchMore = () => {
-    isApiRequestCanceled.current = true;
-
     apiRequest();
   };
 
   return {
-    isLoading, error, apiReturned, fetchMore,
+    isLoading, error, apiReturned, fetchMore, isApiRequestCanceled,
   };
 }
