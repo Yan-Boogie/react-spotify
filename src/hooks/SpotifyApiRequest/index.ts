@@ -4,12 +4,14 @@ import {
   useContext,
   useRef,
   useMemo,
+  useCallback,
 } from 'react';
 import { UserTokenContext } from '../context';
 
 /**
  * @todo
- * 1. Spotify playback error type
+ * 1. Build useReducer api fetch feature
+ * 2. Spotify playback error type
  */
 
 type Error = Readonly<{
@@ -35,10 +37,11 @@ export default function useSpotifyApiRequest({
   requestMethod,
   fetchMoreBundle,
 }: UseSpotifyApiRequest) {
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [init, setInit] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<null | Error>(null);
   const [apiReturned, setApiReturned] = useState<null | unknown>(null);
-  const [currentOffset, setCurrentOffset] = useState<number>(fetchMoreBundle?.offset ?? 0);
+  const [currentOffset, setCurrentOffset] = useState(fetchMoreBundle?.offset ?? 0);
   const token = useContext(UserTokenContext);
   const isApiRequestCanceled = useRef(false);
 
@@ -50,9 +53,9 @@ export default function useSpotifyApiRequest({
     return (~requestUrl.indexOf('?')
       ? requestUrl.replace('?', `?limit=${limit}&offset=${currentOffset}`)
       : `${requestUrl}?limit=${limit}&offset=${currentOffset}`);
-  }, [currentOffset]);
+  }, [currentOffset, fetchMoreBundle, requestUrl]);
 
-  const apiRequest = async () => {
+  const apiRequest = useCallback(async () => {
     isApiRequestCanceled.current = false;
     setLoading(true);
 
@@ -75,15 +78,26 @@ export default function useSpotifyApiRequest({
     }
 
     setLoading(false);
-  };
+  }, [fetchMoreBundle, requestMethod, token, urlSuffixed]);
 
   useEffect(() => {
-    apiRequest();
-  }, []);
+    // eslint-disable-next-line no-console
+    console.log('init state', init);
 
-  const fetchMore = () => {
+    if (!init) return () => {};
+
+    apiRequest().then(() => setInit(false));
+
+    return () => {
+      isApiRequestCanceled.current = true;
+    };
+  }, [apiRequest, init]);
+
+  const fetchMore = useCallback(() => {
+    if (!fetchMoreBundle) throw new Error('Usage of fetchMore feature should include fetchMoreBundle props');
+
     apiRequest();
-  };
+  }, [fetchMoreBundle, apiRequest]);
 
   return {
     isLoading, error, apiReturned, fetchMore, isApiRequestCanceled,
