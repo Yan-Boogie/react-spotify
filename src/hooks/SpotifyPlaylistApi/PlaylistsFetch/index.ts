@@ -11,5 +11,15 @@ export default function usePlaylistsFetch({
   limit = 10,
   offset = 0,
 }: UsePlaylistsFetchProps) {
-  
+  const url = userId
+    ? `https://api.spotify.com/v1/users/${userId}/playlists` : 'https://api.spotify.com/v1/me/playlists';
+
+  return useSpotifyApiRequest({
+    requestUrl: url,
+    requestMethod: 'GET',
+    fetchMoreBundle: {
+      limit,
+      offset,
+    },
+  });
 }

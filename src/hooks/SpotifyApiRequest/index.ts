@@ -81,9 +81,6 @@ export default function useSpotifyApiRequest({
   }, [fetchMoreBundle, requestMethod, token, urlSuffixed]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('init state', init);
-
     if (!init) return () => {};
 
     apiRequest().then(() => setInit(false));
@@ -96,7 +93,7 @@ export default function useSpotifyApiRequest({
   const fetchMore = useCallback(() => {
     if (!fetchMoreBundle) throw new Error('Usage of fetchMore feature should include fetchMoreBundle props');
 
-    apiRequest();
+    return apiRequest();
   }, [fetchMoreBundle, apiRequest]);
 
   return {
