@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "lib/types",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
@@ -16,11 +19,8 @@
     "noUnusedLocals": true,
   },
   "include": [
-    "./src",
-    "./*.config.js"
+    "hooks/**/*",
+    "**/*.config.js"
   ],
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": true
+  "exclude": ["node_modules"]
 }
