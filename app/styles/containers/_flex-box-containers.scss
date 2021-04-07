@@ -1,0 +1,24 @@
+@use 'sass:map';
+
+@mixin flex-box-container-reset($width, $height, $options) {
+  @if not $width or not $height {
+    @error 'Arguments "width" and "height" should exist.';
+  }
+
+  width: $width;
+  height: $height;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @each $key, $value in $options {
+    #{key}: #{value};
+  }
+}
+
+@mixin column-flex-box-container-reset($width, $height, $options) {
+  $options: map.set($options, 'flex-direction', 'column');
+
+  @include flex-box-container-reset($width, $height, $options);
+}

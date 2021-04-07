@@ -1,11 +1,13 @@
-import 'styles/globals.scss';
+import 'globals.scss';
+import Player from 'components/player/';
 import type { AppProps } from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div>
+    <main>
       <p>Initial app</p>
       <Component {...pageProps} />
-    </div>
+      <Player />
+    </main>
   );
 }
