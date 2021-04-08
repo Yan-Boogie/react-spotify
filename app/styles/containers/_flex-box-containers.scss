@@ -1,5 +1,7 @@
 @use 'sass:map';
 
+$base-container-padding: 8px 16px;
+
 @mixin flex-box-container-reset($width, $height, $options) {
   @if not $width or not $height {
     @error 'Arguments "width" and "height" should exist.';
@@ -13,7 +15,11 @@
   align-items: flex-start;
 
   @each $key, $value in $options {
-    #{key}: #{value};
+    #{$key}: #{$value};
+  }
+
+  &--with-padding {
+    padding: $base-container-padding;
   }
 }
 
@@ -21,4 +27,8 @@
   $options: map.set($options, 'flex-direction', 'column');
 
   @include flex-box-container-reset($width, $height, $options);
+}
+
+@mixin flex-box-container-full-width($height, $options) {
+  @include flex-box-container-reset(100%, $height, $options);
 }

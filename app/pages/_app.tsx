@@ -1,5 +1,5 @@
 import 'globals.scss';
-import Player from 'components/player/';
+import { PlayerBoard } from 'components/players';
 import type { AppProps } from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -7,7 +7,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <main>
       <p>Initial app</p>
       <Component {...pageProps} />
-      <Player />
+      <PlayerBoard />
     </main>
   );
 }
