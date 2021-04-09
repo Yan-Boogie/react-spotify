@@ -1,5 +1,6 @@
 @use 'sass:map';
 
+$prefix: 'container';
 $base-container-padding: 8px 16px;
 
 @mixin flex-box-container-reset($width, $height, $options) {
@@ -18,7 +19,7 @@ $base-container-padding: 8px 16px;
     #{$key}: #{$value};
   }
 
-  &--with-padding {
+  &__with_padding {
     padding: $base-container-padding;
   }
 }
