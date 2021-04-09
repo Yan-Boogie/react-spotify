@@ -19,17 +19,11 @@ $base-container-padding: 8px 16px;
     #{$key}: #{$value};
   }
 
-  &__with_padding {
+  &__with-padding {
     padding: $base-container-padding;
   }
-}
 
-@mixin column-flex-box-container-reset($width, $height, $options) {
-  $options: map.set($options, 'flex-direction', 'column');
-
-  @include flex-box-container-reset($width, $height, $options);
-}
-
-@mixin flex-box-container-full-width($height, $options) {
-  @include flex-box-container-reset(100%, $height, $options);
+  &__column-direction {
+    flex-direction: column;
+  }
 }

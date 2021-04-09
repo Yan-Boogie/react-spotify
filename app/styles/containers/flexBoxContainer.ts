@@ -6,5 +6,6 @@ type Classes = {
 
 export const flexBoxContainerClasses: Classes = {
   host: flexBoxContainerPrefix,
-  withPadding: `${flexBoxContainerPrefix}__with_padding`,
+  withPadding: `${flexBoxContainerPrefix}__with-padding`,
+  columnDirection: `${flexBoxContainerPrefix}__column-direction`,
 };
