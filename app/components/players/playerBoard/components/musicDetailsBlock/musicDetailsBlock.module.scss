@@ -1,7 +1,7 @@
 @use 'styles/colors' as *;
 @use 'styles/containers' as containers;
 
-.container {
+.#{containers.$prefix} {
   @include containers.flex-box-container-reset(176px, 100%, $options: (
     'align-items': center,
   ));

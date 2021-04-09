@@ -2,7 +2,7 @@
 @use 'styles/colors' as *;
 @use 'styles/containers' as containers;
 
-.container {
+.#{containers.$prefix} {
   @include containers.flex-box-container-reset(100%, 88px, $options: (
     'justify-content': space-between,
   ));

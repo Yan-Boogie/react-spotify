@@ -3,6 +3,10 @@
 $prefix: 'container';
 $base-container-padding: 8px 16px;
 
+/**
+ * @todos
+ * min/max width feature
+ */
 @mixin flex-box-container-reset($width, $height, $options) {
   @if not $width or not $height {
     @error 'Arguments "width" and "height" should exist.';
@@ -25,5 +29,10 @@ $base-container-padding: 8px 16px;
 
   &__column-direction {
     flex-direction: column;
+  }
+
+  &__full {
+    width: 100%;
+    height: 100%;
   }
 }
