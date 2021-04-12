@@ -1,5 +1,6 @@
 import cx from 'clsx';
 import { flexBoxContainerClasses as flexBoxContainer } from 'styles/containers';
+import { baseTextClasses as baseText } from 'styles/texts';
 import styles from './musicDetailsBlock.module.scss';
 
 type MusicDetailsBlockProps = {
@@ -24,9 +25,9 @@ function MusicDetailsBlock(props: MusicDetailsBlockProps) {
         styles[flexBoxContainer.columnDirection],
       )}
       >
-        <h2>{title}</h2>
+        <h2 className={styles[baseText.h2]}>{title}</h2>
         {authors.map((author) => (
-          <h3 key={author}>{author}</h3>
+          <h3 className={styles[baseText.h3]} key={author}>{author}</h3>
         ))}
       </div>
     </div>
