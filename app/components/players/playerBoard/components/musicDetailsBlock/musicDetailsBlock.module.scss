@@ -1,6 +1,6 @@
-@use 'styles/texts';
-@use 'styles/colors' as *;
-@use 'styles/containers' as containers;
+@use 'shared/components/texts';
+@use 'shared/styles/colors' as *;
+@use 'shared/components/containers' as containers;
 
 .#{containers.$prefix} {
   @include containers.flex-box-container-reset(176px, 100%, $options: (

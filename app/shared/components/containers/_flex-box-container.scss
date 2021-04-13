@@ -5,7 +5,8 @@ $base-container-padding: 8px 16px;
 
 /**
  * @todos
- * min/max width feature
+ * 1. min/max width feature
+ * 2. responsive styles feature
  */
 @mixin flex-box-container-reset($width, $height, $options) {
   @if not $width or not $height {

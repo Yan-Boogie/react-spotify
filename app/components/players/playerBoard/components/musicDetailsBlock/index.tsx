@@ -1,6 +1,6 @@
 import cx from 'clsx';
-import { flexBoxContainerClasses as flexBoxContainer } from 'styles/containers';
-import { baseTextClasses as baseText } from 'styles/texts';
+import { flexBoxContainerClasses as flexBoxContainer } from 'shared/components/containers';
+import { baseTextClasses as baseText } from 'shared/components/texts';
 import styles from './musicDetailsBlock.module.scss';
 
 type MusicDetailsBlockProps = {

@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { flexBoxContainerClasses as flexBoxContainer } from 'styles/containers';
+import { flexBoxContainerClasses as flexBoxContainer } from 'shared/components/containers';
 import styles from './playerBoard.module.scss';
 import MusicDetailsBlock from './components/musicDetailsBlock';
 
