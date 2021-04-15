@@ -1,0 +1,26 @@
+@use './utils';
+
+$variables: (
+  primary: #1db954,
+  secondary: #191414,
+  bg: (
+    primary: #121212,
+    secondary: #1e1e1e,
+    thirdary: #252525,
+  ),
+  text: (
+    primary: #fff,
+    secondary: #f4f5f6,
+    thirdary: #7c7c7c,
+  ),
+  semantic: (
+    success: #2ccf0f,
+    warning: #fce600,
+    info: #00cbff,
+    error: #db2323
+  )
+);
+
+@function get($keys...) {
+  @return utils.map-get-deep($variables, $keys...);
+}
